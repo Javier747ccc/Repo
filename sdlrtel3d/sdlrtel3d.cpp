@@ -413,8 +413,6 @@ int MainLoop(void)
 			}
 		}
 	}
-	if (SaveBuf)
-		delete SaveBuf;
 	
 	return 0;
 }
@@ -484,6 +482,8 @@ int main(int argc, char *argv[])
 
 	SDL_RemoveTimer(timer_id);
 
+	if (SaveBuf)
+		delete SaveBuf;
 
 	SDL_Quit();
 	return 0;
