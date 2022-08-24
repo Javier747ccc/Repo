@@ -1,0 +1,7 @@
+#pragma warning(default:4018)
+#pragma warning(default:4996)
+#pragma warning(default:4267)
+#pragma warning(default:4244)
+#pragma warning(default:6011)
+#pragma warning(default:6334)
+#pragma warning(default:6330)

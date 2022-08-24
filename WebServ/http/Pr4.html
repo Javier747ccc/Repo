@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+   <head>
+      <title>JavaScript Internal Script</title>
+      <base href = "https://www.tutorialspoint.com/" />
+      
+      
+   </head>
+
+   <body>
+<label for="chkPassport">
+    <input type="checkbox" id="chkPassport" />
+    Do you have Passport?
+</label>
+<hr />
+<div id="dvPassport" style="display: none">
+  Passport Number:
+  <input type="text" id="txtPassportNumber" />
+</div>
+<div id="AddPassport">
+  Add New Password
+</div>
+<script src='//static.codepen.io/assets/common/stopExecutionOnTimeout-41c52890748cd7143004e05d3c5f786c66b19939c4500ce446314d1748483e13.js'></script><script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
+<script >$(function () {
+    $("#chkPassport").click(function () {
+        if ($(this).is(":checked")) {
+            $("#dvPassport").show();
+            $("#AddPassport").hide();
+        } else {
+            $("#dvPassport").hide();
+            $("#AddPassport").show();
+        }
+    });
+});
+//# sourceURL=pen.js
+</script>
+</body>
+
+</html>

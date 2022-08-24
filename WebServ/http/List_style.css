@@ -1,0 +1,26 @@
+.container img {
+    width: 100%;
+    height: auto;
+	margin-top: 0px;
+    margin-bottom: 0px;
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+.Name
+{
+    background: #D3BDB6;
+	margin-top: 0px;
+}
+body {
+  background: #E9E9E9;
+  
+  font-size: 100%;
+}
+
+.Separador
+{
+    background: #00bcd4;
+	height : 5px;
+}
+

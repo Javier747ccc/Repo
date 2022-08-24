@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>List</title>
+<link href="List_style.css" rel="stylesheet" type="text/css">
+<link href="Menu1_style.css" rel="stylesheet" type="text/css">
+<link href="Buttons_style.css" rel="stylesheet" type="text/css">
+<link href="Individuo.css" rel="stylesheet" type="text/css">
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script>
+	$(window).on("load", function()
+	{
+    $('.save-button').on('click', save_onclick);
+    $('.cancel-button').on('click', cancel_onclick);
+    $('.edit-button').on('click', edit_onclick);
+
+    $('.save-button, .cancel-button').hide();
+});
+
+function edit_onclick()
+{
+    setFormMode($(this).closest("form"), 'edit');
+}
+
+function cancel_onclick()
+{
+    setFormMode($(this).closest("form"), 'view');
+
+    //TODO: Undo input changes?
+}
+
+function save_onclick()
+{
+    setFormMode($(this).closest("form"), 'view');
+
+    //TODO: Send data to server?
+}
+
+
+function setFormMode($form, mode)
+{
+    switch(mode){
+        case 'view':
+            $form.find('.save-button, .cancel-button').hide();
+            $form.find('.edit-button').show();
+            $form.find("input, select").prop("disabled", true);
+            break;
+        case 'edit':
+            $form.find('.save-button, .cancel-button').show();
+            $form.find('.edit-button').hide();
+            $form.find("input, select").prop("disabled", false);
+            break;
+    }
+}
+</script>
+</head>
+
+<body>
+<div>
+	<div class="container blue topBotomBordersOut2">
+    	<a>Hola <#NOMBRE#></a>
+    </div>
+	<div class="container blue topBotomBordersOut">
+	  <a>Buscar</a>
+	  <a>Mensajes</a>
+	  <a>ABOUT</a>
+      <a href="MiPerfil.html">Mi Perfil</a>
+	  <a href="LogOut.html">LogOut</a>
+	  
+	</div>
+</div>
+
+    <table width="100%" border="1" cellspacing="0" cellpadding="0">
+    <tr>
+		<th width="100%" scope="col">
+			<div class="gallery" align="center">
+				<div class="pageCenter">
+						<div class="thumbnails">
+								<img onmouseover="preview.src=img1.src" name="img1" src="http://html-tuts.com/demo/photo_gallery/images/img1.jpg" alt="" />
+								<img onmouseover="preview.src=img2.src" name="img2" src="http://html-tuts.com/demo/photo_gallery/images/img2.jpg" alt="" />
+								<img onmouseover="preview.src=img3.src" name="img3" src="http://html-tuts.com/demo/photo_gallery/images/img3.jpg" alt="" />
+								<img onmouseover="preview.src=img4.src" name="img4" src="http://html-tuts.com/demo/photo_gallery/images/img4.jpg" alt="" />
+								<img onmouseover="preview.src=img5.src" name="img5" src="http://html-tuts.com/demo/photo_gallery/images/img5.jpg" alt="" />
+						</div>
+
+						<div class="preview" align="center">
+								<img name="preview" src="http://html-tuts.com/demo/photo_gallery/images/img1.jpg" alt="" />
+						</div>
+				</div>
+			</div>
+		</th>
+    </tr>
+	<tr>
+		<th width="100%" scope="col">
+        	<form>
+			<table width="80%" border="1" align="center" cellpadding="0" cellspacing="0">
+			<div>
+					<tr>
+					  <th width="90%" bgcolor="#000000" class="cyan" scope="col">Sobre Mi</th>
+					  <th width="10%" bgcolor="#000000" class="cyan" scope="col">
+                      
+                      
+                          <div class="row button-section">
+                            <div class="large-12 columns">
+                                <a class="button small radius save-button">Save</a>
+                                <a class="button small radius cancel-button">Cancel</a>
+                                <a class="button small radius edit-button">Edit</a>
+                            </div>
+                          </div>
+                      </th>
+					</tr>
+					<tr>
+					  <td colspan="2" align="center" bgcolor="#FFFFFF" style="font-style: normal" scope="col">[[[6]]]</td>
+					</tr>
+					<tr>
+					  <th colspan="2" scope="row">&nbsp;</th>
+					</tr>
+				
+			</div>
+		  </table>
+          </form>
+		</th>
+	</tr>
+	</table>
+
+</body>
+
+
+</html>
+
+

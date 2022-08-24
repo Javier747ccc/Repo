@@ -1,0 +1,61 @@
+.Mensaje {
+  padding: 1px;
+}
+
+/* GENERAL BUTTON STYLING */
+button,
+button::after {
+  -webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+button {
+	background: none;
+	border: 3px solid #fff;
+	border-radius: 5px;
+	color: #000;
+	display: block;
+	font-size: 1.6em;
+	font-weight: bold;
+	margin-top: 10px;
+	margin-bottom: 0em;
+	position: relative;
+	text-transform: uppercase;
+	height: 100%;
+	margin-right: 10px;
+	margin-left: 10px;
+}
+
+button::before,
+button::after {
+  background: #fff;
+  content: '';
+  position: absolute;
+  z-index: -1;
+}
+
+button:hover {
+  color: #145A32;
+  background: #fff;
+}
+
+
+.btn-3{
+	background: #858FFF
+	;
+}
+.btn-3::after {
+  height: 0;
+  left: 50%;
+  top: 50%;
+  width: 0;
+}
+
+.btn-3:hover:after {
+  height: 100%;
+  left: 0;
+  top: 0;
+  width: 100%;
+}

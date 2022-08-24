@@ -1,0 +1,6 @@
+syntax = "proto2"
+
+response {
+  requestId: "ID00001"
+  mensaje: "Esto es una prueba"
+}

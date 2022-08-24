@@ -1,0 +1,292 @@
+body {
+background:url(Images/Main.jpg) no-repeat center fixed;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+margin: 0;
+}	
+
+div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, 
+pre, form, fieldset, input, textarea, p, blockquote, th, td 
+{ 
+  padding:0;
+  margin:0;}
+
+fieldset, img {border:0}
+
+ol, ul, li {list-style:none}
+
+:focus {outline:none}
+
+body,
+input,
+textarea,
+select {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  color: #4c4c4c;
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: 300;
+  color: #4c4c4c;
+  text-align: center;
+  padding-top: 10px;
+  margin-bottom: 10px;
+}
+
+html{
+  background-color: #000000;
+}
+
+.registerbox {
+  margin: 20px auto;
+  width: 343px; 
+  height: 500px; 
+  -webkit-border-radius: 8px/7px; 
+  -moz-border-radius: 8px/7px; 
+  border-radius: 8px/7px; 
+  background-color: #ebebeb; 
+  -webkit-box-shadow: 1px 2px 5px rgba(0,0,0,.31); 
+  -moz-box-shadow: 1px 2px 5px rgba(0,0,0,.31); 
+  box-shadow: 1px 2px 5px rgba(0,0,0,.31); 
+  border: solid 1px #cbc9c9;
+
+}
+
+.loginbox {
+  margin: 20px auto;
+  width: 400px; 
+  height: 350px; 
+  -webkit-border-radius: 8px/7px; 
+  -moz-border-radius: 8px/7px; 
+  border-radius: 8px/7px; 
+  background-color: #ebebeb; 
+  -webkit-box-shadow: 1px 2px 5px rgba(0,0,0,.31); 
+  -moz-box-shadow: 1px 2px 5px rgba(0,0,0,.31); 
+  box-shadow: 1px 2px 5px rgba(0,0,0,.31); 
+  border: solid 1px #cbc9c9;
+}
+
+input[type=radio] {
+  visibility: hidden;
+}
+
+form{
+  margin: 0 30px;
+}
+
+label.radio {
+	cursor: pointer;
+  text-indent: 35px;
+  overflow: visible;
+  display: inline-block;
+  position: relative;
+  margin-bottom: 15px;
+}
+
+label.radio:before {
+  background: #3a57af;
+  content:'';
+  position: absolute;
+  top:2px;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+}
+
+label.radio:after {
+	opacity: 0;
+	content: '';
+	position: absolute;
+	width: 0.5em;
+	height: 0.25em;
+	background: transparent;
+	top: 7.5px;
+	left: 4.5px;
+	border: 3px solid #ffffff;
+	border-top: none;
+	border-right: none;
+
+	-webkit-transform: rotate(-45deg);
+	-moz-transform: rotate(-45deg);
+	-o-transform: rotate(-45deg);
+	-ms-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+}
+
+input[type=radio]:checked + label:after {
+	opacity: 1;
+}
+
+hr{
+  color: #a9a9a9;
+  opacity: 0.3;
+}
+
+
+
+
+
+
+button.buttonReg {
+	margin-top: 30px;
+	font-size: 14px;
+	font-weight: 600;
+	color: white;
+	padding-top: 10px;
+	padding-right: 25px;
+	padding-left: 25px;
+	padding-bottom: 10px;
+	display: inline-block;
+	float: right;
+	text-decoration: none;
+	width: 200px;
+	height: 24px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 15px;
+	background-color: #3a57af;
+	-webkit-box-shadow: 0 3px rgba(58,87,175,.75);
+	-moz-box-shadow: 0 3px rgba(58,87,175,.75);
+	box-shadow: 0 3px rgba(58,87,175,.75);
+	transition: all 0.5s linear 0s;
+	position: relative;
+}
+button.buttonLogin {
+	margin-top: 0px;
+	font-size: 14px;
+	font-weight: 600;
+	color: white;
+	padding-top: 10px;
+	padding-right: 25px;
+	padding-left: 25px;
+	padding-bottom: 10px;
+	display: inline-block;
+	float: right;
+	text-decoration: none;
+	width: 150px;
+	height: 48px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 15px;
+	background-color: #3a57af;
+	-webkit-box-shadow: 0 3px rgba(58,87,175,.75);
+	-moz-box-shadow: 0 3px rgba(58,87,175,.75);
+	box-shadow: 0 3px rgba(58,87,175,.75);
+	transition: all 0.5s linear 0s;
+	}
+
+a.button:hover {
+  top: 5px;
+  background-color:#2e458b;
+  -webkit-box-shadow: none; 
+  -moz-box-shadow: none; 
+  box-shadow: none;
+  
+}
+
+
+.cc-selector input{
+    margin:0;padding:0;
+    -webkit-appearance:none;
+       -moz-appearance:none;
+            appearance:none;
+}
+.ButtonM{background-image:url(Images/ManButton.png);}
+.ButtonW{background-image:url(Images/WoManButton.png);}
+
+
+input[type=radio]:checked + label>img {
+  border: 1px solid #fff;
+  box-shadow: 0 0 3px 3px #090;
+}
+
+input[type=radio] + label>img {
+  border: 0px solid #444;
+  width: 48px;
+  height: 48px;
+  transition: 500ms all;
+}
+input[type=radio]:checked + label>img {
+  transform: 
+    rotateZ(-10deg) 
+    rotateX(10deg);
+}
+
+[id^=radio-] {
+  display: none;
+}
+
+[id^=radio-] + label {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 50px;
+  color: #111;
+  cursor: pointer;
+}
+
+[id^=radio-]:checked + label {
+  color: tomato;
+  cursor: text;
+}
+.SinRellenar{
+	height = 50;
+	background:#00FFCB;
+}
+
+
+
+input[type=text],input[type=email],input[type=password]{
+    width:100%;
+    border:2px solid #aaa;
+    border-radius:4px;
+    margin:8px 0;
+    outline:none;
+    padding:8px;
+    box-sizing:border-box;
+    transition:.3s;
+  }
+  
+  input[type=text]:focus{
+    border-color:dodgerBlue;
+    box-shadow:0 0 8px 0 dodgerBlue;
+  }
+  
+  .inputWithIcon input[type=text],input[type=email],input[type=password]{
+    padding-left:40px;
+  }
+  
+  .inputWithIcon{
+    position:relative;
+  }
+  
+  .inputWithIcon i{
+    position:absolute;
+    left:0;
+    top:8px;
+    padding:9px 8px;
+    color:#aaa;
+    transition:.3s;
+  }
+  
+  .inputWithIcon input[type=text]:focus + i{
+    color:dodgerBlue;
+  }
+  
+  .inputWithIcon.inputIconBg i{
+    background-color:#aaa;
+    color:#fff;
+    padding:9px 4px;
+    border-radius:4px 0 0 4px;
+  }
+  
+  .inputWithIcon.inputIconBg input[type=text]:focus + i{
+    color:#fff;
+    background-color:dodgerBlue;
+  }
+  
+  

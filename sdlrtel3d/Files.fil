@@ -1,0 +1,14 @@
+*.tlog
+*.log
+*.ilk
+*.obj
+*.manifest
+*.res
+*.rc
+*.idb
+*.pdb
+*.ipch
+*.opensdf
+*.sdf
+*.suo
+*.user

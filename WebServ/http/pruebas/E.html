@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Documento sin título</title>
+<link href="../List_style.css" rel="stylesheet" type="text/css">
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+</head>
+
+<body>
+	<form>
+  <div class="row button-section">
+  <div class="large-12 columns">
+<a class="button small radius save-button">Save</a>
+<a class="button small radius cancel-button">Cancel</a>
+<a class="button small radius edit-button">Edit</a>
+  </div>
+  </div>
+  
+  
+    <div class="row">
+    <div class="large-12 columns">
+      <label>Input Label
+        <input type="text" placeholder="some example text" />
+      </label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-4 columns">
+      <label>Input Label
+        <input type="text" placeholder="some example text" />
+      </label>
+    </div>
+    <div class="large-4 columns">
+      <label>Input Label
+        <input type="text" placeholder="some example text" />
+      </label>
+    </div>
+    <div class="large-4 columns">
+      <div class="row collapse">
+        <label>Input Label</label>
+        <div class="small-9 columns">
+          <input type="text" placeholder="some example text" />
+        </div>
+        <div class="small-3 columns">
+          <span class="postfix">.com</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Select Box
+        <select>
+          <option value="husker">Husker</option>
+          <option value="starbuck">Starbuck</option>
+          <option value="hotdog">Hot Dog</option>
+          <option value="apollo">Apollo</option>
+        </select>
+      </label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-6 columns">
+      <label>Choose Your Favorite</label>
+      <input type="radio" name="pokemon" value="Red" id="pokemonRed"><label for="pokemonRed">Red</label>
+      <input type="radio" name="pokemon" value="Blue" id="pokemonBlue"><label for="pokemonBlue">Blue</label>
+    </div>
+    <div class="large-6 columns">
+      <label>Check these out</label>
+      <input id="checkbox1" type="checkbox"><label for="checkbox1">Checkbox 1</label>
+      <input id="checkbox2" type="checkbox"><label for="checkbox2">Checkbox 2</label>
+    </div>
+  </div>
+
+</form>
+   
+<script>
+$(window).on("load", function(){
+
+    $('.save-button').on('click', save_onclick);
+    $('.cancel-button').on('click', cancel_onclick);
+    $('.edit-button').on('click', edit_onclick);
+
+    $('.save-button, .cancel-button').hide();
+
+});
+
+function edit_onclick(){
+    setFormMode($(this).closest("form"), 'edit');
+}
+
+function cancel_onclick(){
+    setFormMode($(this).closest("form"), 'view');
+
+    //TODO: Undo input changes?
+}
+
+function save_onclick(){
+    setFormMode($(this).closest("form"), 'view');
+
+    //TODO: Send data to server?
+}
+
+
+function setFormMode($form, mode){
+    switch(mode){
+        case 'view':
+            $form.find('.save-button, .cancel-button').hide();
+            $form.find('.edit-button').show();
+            $form.find("input, select").prop("disabled", true);
+            break;
+        case 'edit':
+            $form.find('.save-button, .cancel-button').show();
+            $form.find('.edit-button').hide();
+            $form.find("input, select").prop("disabled", false);
+            break;
+    }
+}
+</script>
+
+
+</body>
+</html>

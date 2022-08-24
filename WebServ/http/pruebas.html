@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Documento sin título</title>
+</head>
+
+<body>
+<form>
+<h1>The XMLHttpRequest Object</h1>
+
+<input  name="email" type="email" required placeholder="Correo electronico"  autocomplete="on" id="lemail">
+<input name="password" type="password" required placeholder="ContraseÃ±a" autocomplete="on" id="lpassword">
+
+<button type="button" onclick="TryLogin()">Request data</button>
+
+<p id="demo"></p>
+</form>
+<script>
+function TryLogin() 
+{
+	
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() 
+  {
+    if (this.readyState == 4 && this.status == 200) 
+	{
+      document.getElementById("demo").innerHTML = this.responseText;
+	  if (this.responseText == "NO")
+	  {
+		  window.alert("Identificación incorrecta!");
+	  }
+	  else
+	  {
+		xhttp.open("GET", "List.html", true);
+  	  }
+    }
+  };
+  var str = "Login?email=" + document.getElementById("lemail").value + "&password=" + document.getElementById("lpassword").value;
+  xhttp.open("GET", str, true);
+  xhttp.send();
+}
+</script>
+
+</body>
+</html>

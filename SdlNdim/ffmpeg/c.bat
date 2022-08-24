@@ -1,0 +1,1 @@
+ffmpeg -i ..\out.avi -vf vflip output.avi

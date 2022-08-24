@@ -1,0 +1,254 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>JCU</title>
+    <link href="index_style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+</head>
+
+<body>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0	">
+  <tbody>
+    <tr>
+      <td><img src="Images/Area81.png" width="158" height="64" alt=""/></td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+  </tbody>
+</table>
+
+<table border="0" cellpadding="100" cellspacing="100">
+ 
+    <tr>
+      <td align="center" valign="middle">
+      
+      
+      <div class="registerbox" id = "registerbox" style="display: none">
+      
+  <h1>Regístrate ahora</h1>
+
+  <form action="Register.html"  method="post" >
+      <hr>
+    <div class="accounttype">
+    <table width="100%" border="0" align="center" cellpadding="10" cellspacing="10">
+  
+    <tr>
+      <td colspan="2" align="center" bgcolor="#FFFFFF">&nbsp; Yo Soy
+      		
+      </td>
+      <td colspan="2" rowspan="2" align="center" bgcolor="#A6A6A6">&nbsp;&nbsp;</td>
+      <td colspan="2" align="center" bgcolor="#FFFFFF">Y Busco</td>
+    </tr>
+    <tr>
+    <div class="cc-selector">
+      <th width="25%">
+        <input name="S1" type="radio" required id="radio-1" value = "R1"/>
+        <label for="radio-1" class= "ButtonM" ><img src="Images/ManButton.png" width="48" /></label>
+        </th>
+      
+      <th width="25%">
+        <input name="S1" type="radio" id="radio-2"  value = "R2"/>
+        <label for="radio-2" class= "ButtonM"><img src="Images/WomanButton.png" width="48" /></label>
+        </th>
+    </div>
+    <div class="cc-selector2">  
+      <th width="25%">
+        <input name="S2" type="radio" required id="radio-3"  value = "R3"/>
+        <label for="radio-3" class= "ButtonM"><img src="Images/ManButton.png" width="48" /></label>
+        </th>
+      <td width="25%" align="center">
+        <input name="S2" type="radio"  id="radio-4"  value = "R4"/>
+        <label for="radio-4" class= "ButtonM"><img src="Images/WomanButton.png"  width="48" /></label>
+        </td>
+    </div>
+    </tr>
+   	 
+    </table>
+    <div class="SinRellenar">
+    		<p id="SinR"></p>
+    </div>
+    
+    </div>
+  <hr>
+  <div class="inputWithIcon">
+  <input  name="email" type="email" required placeholder="Correo electronico"  autocomplete="on">
+  <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+  </div>
+  <div class="inputWithIcon">
+  	<input name="fcontrasena1" type="password" required placeholder="Contraseña" autocomplete="on">
+  	<i class="fa fa-lock" style="font-size:24px"></i>  
+  </div>
+  <div class="inputWithIcon">
+  	<input name="fcontrasena2" type="password" required placeholder="Repetir contraseña" autocomplete="on">
+  	<i class="fa fa-lock" style="font-size:24px"></i>  
+    <p><font color="red"> <#REG#></font></p>
+  </div>
+   
+   
+   <table width="100%" border="0" align="left" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      	<td>&nbsp;</td>
+      	<td valign="top"><button  type="submit" class="buttonLogin" onclick="Conectar()">Conectar</button></td>
+    </tr>
+    <tr>
+      <td>&nbsp;&nbsp;
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <h5> Ya estás registrado? </h5></td>
+      <td valign="bottom"><a href="#" class="buttonReg" onclick="DisplayLogin()">Login</a></td>
+    </tr>
+  </tbody>
+</table>
+
+   
+   
+  </form>
+</div>
+      </td>
+      <td>
+      
+      <div class="loginbox" id = "loginbox">
+  <h1>Login</h1>
+
+  <form action="Login" method="post">
+     
+  <div class="inputWithIcon">
+  <input  name="email" type="email" required placeholder="Correo electronico"  autocomplete="on" id="lemail">
+  <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+  </div>
+  <div class="inputWithIcon">
+  	<input name="password" type="password" required placeholder="Contraseña" autocomplete="on" id="lpassword">
+    <p><font color="red"> <#LOG#></font></p>
+    <i class="fa fa-lock" style="font-size:24px"></i>  
+	</div>
+    
+    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      	<td>&nbsp;</td>
+      	<td valign="top"><button class="buttonLogin" type ="submit"  >Iniciar sesión</button></td>
+    </tr>
+    <tr>
+      <td></td>
+        
+        
+      <th>&nbsp;</th>
+    </tr>
+    <tr>
+      <td><h5> Aun no estás registrado? </h5></td>
+      <th ><a href="#" class="buttonReg" onclick="DisplayRegister()">Registrate</a></th>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td valign="bottom"></td>
+    </tr>
+    <tr>
+      <td><a href="PedirContraseña.html">
+        <h5>Has olvidado tu contraseña?</h5>
+      </a></td>
+      <td valign="bottom"><div id = "demo"></div></td>
+    </tr>
+  </tbody>
+</table>
+
+  
+   
+   
+   <!--<p>By clicking Register, you agree on our <a href="#">terms and condition</a>.</p>-->
+  </form>
+</div>
+      
+      
+      </td>
+  </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+</table>
+
+<script>
+function Conectar() 
+{
+    var x, text,id1,id2,id3,id4,sum;
+
+	id1 = document.getElementById("radio-1").checked;
+	id2 = document.getElementById("radio-2").checked ;
+	id3 = document.getElementById("radio-3").checked ;
+	id4 = document.getElementById("radio-4").checked ;
+	sum = id1+id2+id3+id4;
+	
+	if (sum!=2)
+	{
+		text = "Indica tu sexo y preferencia";
+		document.getElementById("SinR").innerHTML = text;
+		setTimeout(myTimerFunction, 5000);
+		return false;
+	}
+	else
+	{
+	}
+
+    // Get the value of the input field with id="numb"
+
+    // If x is Not a Number or less than one or greater than 10
+    
+}
+</script>
+
+<script>
+function myTimerFunction() {
+    document.getElementById("SinR").innerHTML = "";
+}
+</script>
+<script>
+function TryLogin() 
+{
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() 
+  {
+    if (this.readyState == 4 && this.status == 200) 
+	{
+      document.getElementById("demo").innerHTML = this.responseText;
+	  if (this.responseText == "NO")
+	  {
+		  window.alert("Identificación incorrecta!");
+	  }
+	  else
+	  {
+		  
+	  }
+    }
+  };
+  var str = "email=" + document.getElementById("lemail").value + "&password=" + document.getElementById("lpassword").value;
+  xhttp.open("POST", "Login", true);
+  xhttp.send(str);
+}
+</script>
+<script>
+function DisplayLogin() {
+    var x = document.getElementById("registerbox");
+    var y = document.getElementById("loginbox");
+    
+	x.style.display = "none";
+    y.style.display = "block";
+    
+}
+function DisplayRegister() {
+    var x = document.getElementById("registerbox");
+    var y = document.getElementById("loginbox");
+    
+	x.style.display = "block";
+    y.style.display = "none";
+    
+}
+
+</script>
+</body>
+</html>

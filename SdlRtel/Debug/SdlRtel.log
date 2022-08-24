@@ -1,0 +1,13 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(377,5): warning MSB8004: El directorio Output no termina con una barra diagonal final. Esta instancia de compilación agregará la barra diagonal porque es necesaria para que se pueda evaluar correctamente el directorio Output.
+  SdlRtel.cpp
+c:\prog\repo\sdlrtel\sdlrtel.cpp(215): warning C4244: 'argumento': conversión de 'double' a 'Sint16'; posible pérdida de datos
+c:\prog\repo\sdlrtel\sdlrtel.cpp(229): warning C4244: '+=': conversión de 'double' a 'float'; posible pérdida de datos
+c:\prog\repo\sdlrtel\sdlrtel.cpp(235): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+c:\prog\repo\sdlrtel\sdlrtel.cpp(283): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+c:\prog\repo\sdlrtel\sdlrtel.cpp(288): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+c:\prog\repo\sdlrtel\sdlrtel.cpp(294): warning C4244: 'inicializando': conversión de 'double' a 'int'; posible pérdida de datos
+c:\prog\repo\sdlrtel\sdlrtel.cpp(295): warning C4244: 'inicializando': conversión de 'double' a 'int'; posible pérdida de datos
+c:\prog\repo\sdlrtel\sdlrtel.cpp(376): warning C4305: '+=': truncamiento de 'double' a 'float'
+c:\prog\repo\sdlrtel\sdlrtel.cpp(395): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(1774): note: vea la declaración de 'sprintf'
+  SdlRtel.vcxproj -> C:\Prog\repo\SdlRtel\bin\SdlRtelDl.exe

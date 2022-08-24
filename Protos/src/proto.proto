@@ -1,0 +1,21 @@
+
+
+message ErrorEnRespuesta
+{
+	required string requestId = 1;
+	required string mensaje = 2;
+}
+
+message RespuestaCorrecta
+{
+	required string requestId = 1;
+	required string mensaje = 2;
+}
+message Respuesta
+{
+	oneof result
+	{
+		RespuestaCorrecta response = 1;
+		ErrorEnRespuesta error = 2;
+	}
+}
