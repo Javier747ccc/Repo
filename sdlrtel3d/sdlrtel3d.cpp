@@ -1,15 +1,43 @@
 // sdlrtel3d.cpp : Defines the entry point for the console application.
 //
-
+#include <windows.h>
 #include <math.h>
 #include <time.h>
-
-	#include "fftw3.h"
+#include "SDL_main.h"
 #include "SDL.h"
-#include "SDL_draw.h" 
+#include "SDL_thread.h"
 
+#include "fftw3.h"
+#include "SDL_ttf.h"
 
-#define DEF_TTF
+struct KEYs
+{
+	bool PressUp;
+	bool PressDown;
+	bool PressLEFT;
+	bool PressRIGHT;
+	bool PressPageUp;
+	bool PressPageDw;
+
+	bool center;
+	int Sel;
+	int done;
+	KEYs()
+	{
+		PressUp = false;
+		PressDown = false;
+		PressLEFT = false;
+		PressRIGHT = false;
+		PressPageUp = false;
+		PressPageDw = false;
+		center = true; 
+		Sel = 0;
+		done = 0; 
+	}
+	
+}Rkeys;
+
+//#define DEF_TTF
 #ifdef DEF_TTF
 #include "SDL_TTF.h"
 #endif
@@ -19,6 +47,12 @@
 
 int PanWidth = 256;
 int PanHeight = 256;
+
+unsigned char *imageOrg = NULL;
+SDL_Surface *imageBack;
+SDL_Surface *screen;
+SDL_Window* gWindow = NULL;
+TTF_Font *font;
 
 
 fftw_complex  *fftout = NULL;
@@ -46,8 +80,6 @@ extern "C" FILE * __cdecl __iob_func(void)
 	return _iob;
 }
 
-SDL_Surface *screen;
-SDL_Surface *imageBack;
 int MouseX = 0;
 int MouseY = 0;
 double MouseAngle;
@@ -257,7 +289,16 @@ int DrawScene(unsigned char *Image)
 
 
 		DrawSuelo(Image);
-		SDL_UpdateRect(imageBack, 0, 0, 0, 0);
+
+
+		SDL_Rect offset;
+		offset.x = 0;
+		offset.y = 0;
+
+		SDL_BlitSurface(imageBack, NULL, screen, &offset);
+
+
+		SDL_UpdateWindowSurface(gWindow);
 	}
 	return 1;
 }
@@ -290,130 +331,209 @@ Uint32 DrawSceneCallback(Uint32 interval, void *Image)
 			
 		}
 	}
-	/*
-	char StrTemp[256];
-	sprintf(StrTemp,"F/S : %d          ",FotPS);
-	DrawText(StrTemp,10,16);
-
-	
-	sprintf(StrTemp,"MHZ : %3.5f          ",Herzios/1000000.0);
-	DrawText(StrTemp,10,32);
-
-	double Seg = nTotalFot/SampPerSec;
-	sprintf(StrTemp,"SEC : %3.10f          ",Seg);
-	DrawText(StrTemp,10,48);
-
-	sprintf(StrTemp,"PanLen: %3.2f meters",AllPanXLen);
-	DrawText(StrTemp,10,64);
-
-
-	sprintf(StrTemp,"Mouse Angle:%3.5fº : %3.5f Rad",RadToDeg(MouseAngle), MouseAngle);
-	DrawText(StrTemp,10,80);
-	int x1,y1,x2,y2;
-
-	double a = OneHzLen;
-	L = sqrt(a*tan(pi/2 - MouseAngle) + a*a);
-	sprintf(StrTemp,"Len One Herz:%3.5f m",L);
-	DrawText(StrTemp,10,96);
-
-	x1 = PanWidth/2;
-	y1 = PanHeight/2;
-	x2 = PanWidth/2 + (int)(1000 * cos(-MouseAngle));
-	y2 = PanHeight/2 + (int)(1000 * sin(-MouseAngle));
-	SDraw_Line(imageBack, x1,y1,x2,y2, 0xFF00AAAAAA);
-
-	x1 = MouseX;
-	y1 = MouseY;
-	x2 = MouseX + (int)(1000 * cos(-MouseAngle));
-	y2 = MouseY + (int)(1000 * sin(-MouseAngle));
-	SDraw_Line(imageBack, x1,y1,x2,y2, 0xFF00AAAAAA);
-
-	x1 = MouseX;
-	y1 = MouseY;
-	x2 = MouseX - (int)(1000 * cos(-MouseAngle));
-	y2 = MouseY - (int)(1000 * sin(-MouseAngle));
-	SDraw_Line(imageBack, x1,y1,x2,y2, 0xFF00AAAA00,0,0,PanWidth,PanHeight/2);
-
-
-
-	x1 = PanWidth/2;
-	y1 = PanHeight/2;
-	x2 = PanWidth/2 - (int)(1000 * sin(MouseAngle));
-	y2 = PanHeight/2 - (int)(1000 * cos(MouseAngle));
-	SDraw_Line(imageBack, x1,y1,x2,y2, 0xFF00AAAAAA);
-	x2 = PanWidth/2 + (int)(1000 * sin(MouseAngle));
-	y2 = PanHeight/2 + (int)(1000 * cos(MouseAngle));
-	SDraw_Line(imageBack, x1,y1,x2,y2, 0xFF00AAAAAA);
-
-
-
-	
-*/
 	nFot++;
 	nTotalFot++;
 
+	SDL_UpdateWindowSurface(gWindow);
+
+	/*
 	SDL_BlitSurface(imageBack, NULL, screen, NULL);
 	SDL_UpdateRect(screen, 0, 0, 0, 0); 
+	*/
 	return 1;
 }
-
-SDL_TimerID InitLoop()
+void InitLoop()
 {
-	SDL_Surface *SDLImage = SDL_LoadBMP("Imagen2_768.bmp");
+	SDL_Surface *SDLImage = SDL_LoadBMP("Imagen2_256.bmp");
 	PanWidth = SDLImage->w;
 	PanHeight = SDLImage->h;
 	SDL_LockSurface(SDLImage);
-	unsigned char *Image = new unsigned char[PanWidth *PanHeight * 2];
+	imageOrg = new unsigned char[PanWidth *PanHeight * 2];
 
-	memcpy(Image, SDLImage->pixels, PanWidth * PanHeight);
-	memcpy(&Image[PanWidth * PanHeight], SDLImage->pixels, PanWidth * PanHeight);
-	InvertImage(Image);
+	memcpy(imageOrg, SDLImage->pixels, PanWidth * PanHeight);
+	memcpy(&imageOrg[PanWidth * PanHeight], SDLImage->pixels, PanWidth * PanHeight);
+	InvertImage(imageOrg);
 	SDL_UnlockSurface(SDLImage);
 	SDL_FreeSurface(SDLImage);
-
-
-	SDL_TimerID my_timer_id = SDL_AddTimer((33 / 10) * 10, DrawSceneCallback, Image);
-	return my_timer_id;
 }
-int MainLoop(void)
+
+bool InitSdl()
 {
-	int done=0;
-	Uint8 *keys;
+	//Initialization flag
+	bool success = true;
 
-	
-
-
-	SDL_Event event;
-	while(done == 0)
+	//Initialize SDL
+	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
-		
-		while ( SDL_PollEvent(&event) )
+		printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
+		success = false;
+	}
+	else
+	{
+		InitLoop();
+		//Create window
+		gWindow = SDL_CreateWindow("SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, PanWidth, PanHeight, SDL_WINDOW_SHOWN);
+		if (gWindow == NULL)
 		{
-			switch(event.type)
-			{ 
-				case SDL_MOUSEBUTTONDOWN:
-				case SDL_MOUSEBUTTONUP:
-					PressMouse(event.button.button,event.button.state,event.button.x,event.button.y);
-					break;
-				case SDL_MOUSEMOTION:
-					MoveMouse(event.button.x,event.button.y);
-					break;
-				case SDL_QUIT:
-					done = 1;
-					break;
-				case SDL_KEYDOWN:
-					if ( event.key.keysym.sym == SDLK_ESCAPE ) 
-						done = 1; 
-					else
-					{
-						keys = SDL_GetKeyState(NULL);
-						presskey( keys);
-					}
-					break;
+			printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
+			success = false;
+		}
+		else
+		{
+			//Get window surface
+			screen = SDL_GetWindowSurface(gWindow);
+
+			if (TTF_Init() == -1)
+			{
+				printf("TTF_Init: %s\n", TTF_GetError());
+				exit(2);
+			}
+
+			font = TTF_OpenFont("Arial-th.ttf", 16);
+			if (!font)
+			{
+				printf("TTF_OpenFont: %s\n", TTF_GetError());
+				exit(2);
 			}
 		}
 	}
-	
+
+	return success;
+}
+/*
+int DrawScene(fftw_complex  *display, int tickCount)
+{
+
+	static unsigned int nFot = 0;
+	static unsigned int FotPS = 0;
+	static unsigned int told = 0;
+	static int nFotograma = 0;
+	static unsigned char *pixels24 = NULL;
+	SDL_Rect offset;
+	offset.x = 0;
+	offset.y = 0;
+
+
+	int tnew = tickCount;
+
+	if ((tnew - told)>1000)
+	{
+		told = tnew;
+		FotPS = nFot;
+		nFot = 0;
+		printf("\rF/S : %d ", FotPS);
+	}
+	if (Rkeys.Sel == 1)
+	{
+		DrawScene((unsigned char *)Image);
+		CreateFFtScene(display);
+		Normalize(display);
+
+	}
+	Normalize(display);
+
+	CreateDisplayScene(display);
+
+
+
+	Uint32 *pixels = (Uint32 *)imageBack->pixels;
+	Uint32 *buf = pixels;
+
+
+
+	SDL_Color color = { 255,255,255 };
+	SDL_Surface *text_surface;
+	std::ostringstream Texto;
+	Texto << "Dist = " << zPos;
+	text_surface = TTF_RenderText_Solid(font, Texto.str().c_str(), color);
+
+
+	if (Sel > 0)
+	{
+		InvertImage((TColorRGB *)pixels);
+	}
+
+	SDL_BlitSurface(imageBack, NULL, screen, &offset);
+	SDL_BlitSurface(text_surface, NULL, screen, &offset);
+
+	if (pixels24 == NULL)
+		pixels24 = new unsigned char[PanWidth * PanHeight * 3];
+
+	TColorRGB *pixels32 = (TColorRGB *)pixels;
+	for (int i = 0; i < PanWidth * PanHeight; i++)
+	{
+		pixels24[i * 3 + 2] = pixels32[i].r;
+		pixels24[i * 3 + 1] = pixels32[i].g;
+		pixels24[i * 3] = pixels32[i].b;
+	}
+
+	writer.WriteFrame(pixels24, nFotograma++);
+
+
+	//Update the screen
+	SDL_UpdateWindowSurface(gWindow);
+
+	nFot++;
+	return 0;
+}
+
+*/
+int MainLoop()
+{
+	static int firstT = 0;
+
+	if (firstT == 0)
+		firstT = GetTickCount();
+
+
+	const Uint8 *keys;
+
+	while (Rkeys.done == 0)
+	{
+		SDL_Event event;
+		while (SDL_PollEvent(&event))
+		{
+			if (event.type == SDL_QUIT) { Rkeys.done = 1; }
+			if (event.type == SDL_KEYDOWN)
+			{
+				switch (event.key.keysym.sym)
+				{
+					//case SDLK_LEFT:  x--; break;
+					//case SDLK_RIGHT: x++; break;
+				case SDLK_UP:		Rkeys.PressUp = true; break;
+				case SDLK_DOWN:		Rkeys.PressDown = true; break;
+				case SDLK_LEFT:		Rkeys.PressLEFT = true; break;
+				case SDLK_RIGHT:	Rkeys.PressRIGHT = true; break;
+				case SDLK_PAGEUP:	Rkeys.PressPageUp = true; break;
+				case SDLK_PAGEDOWN:	Rkeys.PressPageDw = true; break;
+				case SDLK_c:		Rkeys.center = true; break;
+				case SDLK_1:		Rkeys.Sel = 0; break;
+				case SDLK_2:		Rkeys.Sel = 1; break;
+				case SDLK_ESCAPE:	Rkeys.done = 1; break;
+
+				}
+			}
+			if (event.type == SDL_KEYUP)
+			{
+				switch (event.key.keysym.sym)
+				{
+				case SDLK_UP:		Rkeys.PressUp = false; break;
+				case SDLK_DOWN:		Rkeys.PressDown = false; break;
+				case SDLK_LEFT:		Rkeys.PressLEFT = false; break;
+				case SDLK_RIGHT:	Rkeys.PressRIGHT = false; break;
+				case SDLK_PAGEUP:	Rkeys.PressPageUp = false; break;
+				case SDLK_PAGEDOWN:	Rkeys.PressPageDw = false; break;
+				}
+			}
+		}
+
+		
+
+		int tnew = GetTickCount() - firstT;
+		DrawScene(imageOrg);
+
+	}
+
 	return 0;
 }
 
@@ -437,53 +557,10 @@ int main(int argc, char *argv[])
 	srand( (unsigned)time( NULL ) );
 	
 
-#ifdef DEF_TTF
-	if (TTF_Init() == -1) 
-	{
-		printf("Fallo al inicializar SDL_TTF");
-		exit(1);
-	}
 
-	
-	fuente = TTF_OpenFont("arial-black.ttf", 14);
-	if(fuente == NULL) 
-	{
-	  printf("Fallo al abrir la fuente");
-	  exit(1);
-	}
-
-	TTF_SetFontStyle(fuente, TTF_STYLE_BOLD);
-#endif		 
-	
-	if (SDL_Init(SDL_INIT_VIDEO | SDL_SWSURFACE | SDL_INIT_TIMER) < 0)
-	{
-		printf("error al iniciar SDL: %s\n", SDL_GetError());
-		return 1;
-	}
-	SDL_TimerID timer_id = InitLoop();
-
-	screen = SDL_SetVideoMode(PanWidth, PanHeight, 32, SDL_HWSURFACE);
-	imageBack = SDL_CreateRGBSurface(SDL_HWSURFACE, PanWidth, PanHeight, 32, 0, 0, 0, 0);
-
-	if (screen == NULL)
-	{
-		printf("error al setear el modo de video: %s\n", SDL_GetError());
-		return 1;
-	}
-	SDL_WM_SetCaption("SDLRTel!", "SDLRTel!");
-
+	InitSdl();
+	imageBack = SDL_CreateRGBSurface(0, PanWidth, PanHeight, 32, 0, 0, 0, 0);
 	MainLoop();
-
-
-#ifdef DEF_TTF
-	TTF_CloseFont(fuente);
-	TTF_Quit();
-#endif
-
-	SDL_RemoveTimer(timer_id);
-
-	if (SaveBuf)
-		delete SaveBuf;
 
 	SDL_Quit();
 	return 0;
